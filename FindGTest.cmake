@@ -1,10 +1,6 @@
 include(FetchContent)
 
-option( FORCE_DOWNLOAD_GTEST "Download GTesT even if it is installed" ON)
-
-if(NOT FORCE_DOWNLOAD_GTEST)
-  find_package(GTest)
-endif()
+option(GTEST_FORCE_DOWNLOAD "Download GTest even if it could be found" ON)
 
 if(NOT GTest_TAG)
   if(ENV{GTEST_TAG})
@@ -12,8 +8,13 @@ if(NOT GTest_TAG)
   endif()
 endif()
 
-if(NOT GTest_FOUND)
+if(NOT GTEST_FORCE_DOWNLOAD)
+  find_package(GTest CONFIG)
+endif()
 
+
+
+if(NOT GTest_FOUND)
   if(GTest_TAG)
     FetchContent_Declare(googletest
       GIT_REPOSITORY https://github.com/google/googletest
@@ -41,4 +42,3 @@ if((NOT TARGET GTest::gtest) AND GTest_FOUND)
 elseif(NOT TARGET GTest::gtest)
   message(FATAL_ERROR "GTest dependency was not correctly resolved")
 endif()
-
