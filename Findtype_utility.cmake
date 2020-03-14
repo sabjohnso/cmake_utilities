@@ -24,7 +24,7 @@ if(NOT DEFINED type_utility_FORCE_DOWNLOAD)
       "Download and use the type_utility library even if it could be found")
   else()
     set(type_utility_FORCE_DOWNLOAD FALSE CACHE BOOL
-      "Download and use the type_utility library even if it could be found"
+      "Download and use the type_utility library even if it could be found")
   endif()
 endif()
 
