@@ -62,5 +62,4 @@ if(NOT type_utility_FOUND)
       add_subdirectory(${type_utility_SOURCE_DIR} ${type_utility_BINARY_DIR})
     endif()
   endif()
-
 endif()
