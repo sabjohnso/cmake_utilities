@@ -8,9 +8,6 @@ function(parameter)
     message(FATAL_ERROR "'parameter' is missing the required keyword NAME")
   endif()
 
-  if(NOT PAR_DEFAULT)
-    message(FATAL_ERROR "'parameter' is missing the required keyword DEFAULT")
-  endif()
 
   if(NOT PAR_TYPE)
     message(FATAL_ERROR "'parameter' is missing the required keyword TYPE")

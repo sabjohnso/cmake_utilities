@@ -21,7 +21,7 @@ macro(git_resolvable_dependency)
 
   parameter(
     NAME ${DEP_NAME}_GIT_TAG
-    DEFAULT ${DEP_GIT_REPOSITORY}
+    DEFAULT ${DEP_GIT_TAG}
     TYPE "STRING"
     DOC "git tag for ${DEP_NAME}")
 
