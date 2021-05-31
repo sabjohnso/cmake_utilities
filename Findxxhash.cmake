@@ -1,4 +1,4 @@
-if(NOT xxHash_FOUND)
+if(NOT xxhash_FOUND)
   include(dependency)
 
   git_resolvable_dependency(
@@ -26,7 +26,7 @@ if(NOT xxHash_FOUND)
         INTERFACE_INCLUDE_DIRECTORIES ${xxhash_BINARY_DIR}/include)
 
     add_library(xxhash::xxhash_STATIC IMPORTED STATIC)
-    set_target_properties(xxhash::xxhash_SHARED
+    set_target_properties(xxhash::xxhash_STATIC
       PROPERTIES
         IMPORTED_LOCATION ${xxhash_BINARY_DIR}/lib/libxxhash.a
         IMPORTED_GLOBAL TRUE
@@ -36,13 +36,6 @@ if(NOT xxHash_FOUND)
     set_target_properties(xxhash::xxhsum
       PROPERTIES
         IMPORTED_LOCATION ${xxhash_BINARY_DIR}/bin/xxhsum)
-
-
-
-
-    function(xxhash_install)
-
-    endfunction()
 
     if(NOT xxhash_EXCLUDE_FROM_ALL)
       install(CODE "execute_process(COMMAND env ${xxhash_BUILD_END} make PREFIX=${CMAKE_INSTALL_PREFIX} install -j  WORKING_DIRECTORY ${xxhash_SOURCE_DIR})")
