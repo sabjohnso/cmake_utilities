@@ -34,8 +34,9 @@ if(NOT zmq_FOUND)
     NAME zmq
     GIT_REPOSITORY https://github.com/zeromq/libzmq.git
     GIT_TAG master)
-
-  build_make(${zmq_SOURCE_DIR} ${zmq_BINARY_DIR} AUTOGEN CONFIGURE)
+  if(NOT EXISTS ${zmq_BINARY_DIR}/bin)
+    build_make(${zmq_SOURCE_DIR} ${zmq_BINARY_DIR} AUTOGEN CONFIGURE)
+  endif()
   add_imported_package(ROOT ${zmq_BINARY_DIR} ${zmq_PKG})
 
 endif()
