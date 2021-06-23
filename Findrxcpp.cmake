@@ -16,7 +16,7 @@ if(NOT rxcpp_FOUND)
   if(NOT rxcpp_EXCLUDE_FROM_ALL)
     install(
       DIRECTORY
-      ${rxcpp_SOURCE_DIR}Rx/v2/src/rxcpp
+      ${rxcpp_SOURCE_DIR}/Rx/v2/src/rxcpp
 
       DESTINATION
       ${CMAKE_INSTALL_INCLUDEDIR}
@@ -24,5 +24,5 @@ if(NOT rxcpp_FOUND)
       FILES_MATCHING PATTERN
       "*.hpp")
   endif()
-
+  set(rxcpp_FOUND TRUE)
 endif()
