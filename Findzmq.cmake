@@ -1,6 +1,8 @@
 include(dependency)
 include(imported)
 include(build)
+
+message(WARNING "Findzmq is deprecated. Use FindZeroMQ instead.")
 if(NOT zmq_FOUND)
   set_package(zmq_PKG
     NAMESPACE zmq
