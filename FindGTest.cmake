@@ -32,10 +32,7 @@ if(NOT GTest_FOUND)
     add_subdirectory(${googletest_SOURCE_DIR} ${googletest_BINARY_DIR} EXCLUDE_FROM_ALL)
   endif()
 
-  add_library(GTest::gtest ALIAS gtest)
-  add_library(GTest::gtest_main ALIAS gtest_main)
-  add_library(GTest::gmock ALIAS gmock)
-  add_library(GTest::gmock_main ALIAS gmock_main)
+  set(GTest_FOUND TRUE)
 
 endif()
 
