@@ -1,0 +1,7 @@
+if(NOT pfr_FOUND)
+  include(dependency)
+  git_resolvable_dependency(NAME pfr GIT_REPOSITORY https://github.com/apolukhin/pfr_non_boost.git)
+  if(NOT pfr_FOUND)
+    add_subdirectory(${pfr_SOURCE_DIR} ${pfr_BINARY_DIR} ${pfr_EXCLUDE_FROM_ALL})
+  endif()
+endif()
