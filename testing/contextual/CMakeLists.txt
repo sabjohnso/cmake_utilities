@@ -10,3 +10,5 @@ target_link_libraries(consume_contextual
     contextual::header
     type_utility::type_utility
     function_utility::function_utility)
+  set_target_properties(consume_contextual
+    PROPERTIES CXX_STANDARD ${contextual_CXX_STANDARD})

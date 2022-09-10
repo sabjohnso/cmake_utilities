@@ -6,3 +6,4 @@ find_package(ctstring REQUIRED)
 
 add_executable(consume_ctstring consume_ctstring.cpp)
 target_link_libraries(consume_ctstring PRIVATE ctstring::header)
+set_target_properties(consume_ctstring PROPERTIES CXX_STANDARD ${ctstring_CXX_STANDARD})
