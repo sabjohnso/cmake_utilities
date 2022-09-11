@@ -2,7 +2,8 @@
 include(dependency)
 git_resolvable_dependency(
   NAME rxcpp
-  GIT_REPOSITORY https://github.com/ReactiveX/RxCpp.git)
+  GIT_REPOSITORY   https://github.com/ReactiveX/RxCpp.git
+  GIT_TAG main)
 
 if(NOT rxcpp_FOUND)
   include(GNUInstallDirs)

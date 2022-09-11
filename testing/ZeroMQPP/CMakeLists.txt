@@ -7,4 +7,7 @@ find_package(ZeroMQPP REQUIRED)
 
 add_executable(ZeroMQIntegration ZeroMQPPIntegration.cpp)
 target_link_libraries(ZeroMQIntegration
-  PRIVATE ZeroMQ::libzmq-static zmqpp-static)
+  PRIVATE libzmq-static zmqpp-static)
+
+set_target_properties(ZeroMQIntegration
+  PROPERTIES CXX_STANDARD 20)
