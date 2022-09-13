@@ -16,12 +16,12 @@ endif()
 if(NOT EXISTS ${TEST_BINARY_DIR}/CMakeCache.txt)
   execute_process(
     COMMAND ${CMAKE_COMMAND} -E make_directory ${TEST_BINARY_DIR})
-  execute_process(
+
+endif()
+ execute_process(
     COMMAND ${CMAKE_COMMAND} ${TEST_SOURCE_DIR}
     WORKING_DIRECTORY ${TEST_BINARY_DIR}
     COMMAND_ERROR_IS_FATAL ANY)
-endif()
-
 execute_process(
   COMMAND ${TEST_MAKE_COMMAND}
   WORKING_DIRECTORY ${TEST_BINARY_DIR}
