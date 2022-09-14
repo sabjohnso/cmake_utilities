@@ -26,9 +26,8 @@ if(NOT pfr_FOUND)
 
     target_include_directories(pfr_header
       INTERFACE
-      $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}>
-      $<BUILD_INTERFACE:${PROJECT_BINARY_DIR}>
-      $<INSTALL_INTERFACE:${easyj_INSTALL_INCLUDEDIR}>)
+      $<BUILD_INTERFACE:${pfr_SOURCE_DIR}/include>
+      $<INSTALL_INTERFACE:${pfr_INSTALL_INCLUDEDIR}/include>)
 
      install(DIRECTORY ${pfr_SOURCE_DIR}/include
        DESTINATION ${pfr_INSTALL_INCLUDEDIR}/introspection
