@@ -29,7 +29,7 @@ if(NOT TARGET pybind11::headers)
 
     target_link_libraries(pybind11_headers
       INTERFACE
-      $<INSTALL_INTERFACE:${pfr_INSTALL_INCLUDEDIR})
+      $<INSTALL_INTERFACE:${pybind11_INSTALL_INCLUDEDIR}>)
 
     install(TARGETS pybind11_headers
       EXPORT pybin11_EXPORTS)
