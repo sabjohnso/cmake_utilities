@@ -5,7 +5,7 @@ option(benchmark_FORCE_DOWNLOAD
   "Download benchmark even if it could be found"
   ON)
 
-configurable(benchmark_TAG BENCHMARK_TAG v1.5.1
+configurable(benchmark_TAG BENCHMARK_TAG v1.8.0
   "Tag to use for the google benchmark repository")
 
 configurable(benchmark_REPOSITORY BENCHMARK_REPOSITORY https://github.com/google/benchmark.git
