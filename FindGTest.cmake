@@ -1,7 +1,7 @@
 include(FetchContent)
 
 option(GTEST_FORCE_DOWNLOAD "Download GTest even if it could be found" ON)
-set(GTest_TAG_DEFAULT main)
+set(GTest_TAG_DEFAULT v1.13.0)
 if(NOT GTest_TAG)
   if(ENV{GTEST_TAG})
     set(GTest_TAG $ENV{GTEST_TAG} CACHE STRING "Tag for GTest git repository")
