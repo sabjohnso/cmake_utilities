@@ -74,45 +74,61 @@ Install a package
 
 #]=====================================================================================]
 
-macro(_Racket_find_racket)
-  # Find the racket executable
-  find_program(
-    RACKET_EXECUTABLE
-    NAMES racket
-  )
-  mark_as_advanced(RACKET_EXECUTABLE)
+function(_racket_find_racket)
+  find_program(RACKET_EXECUTABLE NAMES racket)
+  set(RACKET_EXECUTABLE ${RACKET_EXECUTABLE} PARENT_SCOPE)
+  add_executable(Racket::racket IMPORTED GLOBAL)
+  set_target_properties(Racket::racket PROPERTIES IMPORTED_LOCATION "${RACKET_EXECUTABLE}")
+endfunction()
 
-  if(RACKET_EXECUTABLE)
+function(_racket_find_raco)
+  find_program(RACO_EXECUTABLE NAMES racket)
+  set(RACO_EXECUTABLE ${RACO_EXECUTABLE} PARENT_SCOPE)
+  add_executable(Racket::raco IMPORTED GLOBAL)
+  set_target_properties(Racket::raco PROPERTIES IMPORTED_LOCATION "${RACO_EXECUTABLE}")
+endfunction()
 
-    # Get the racket version
-    execute_process(
-      COMMAND "${RACKET_EXECUTABLE}" --version
-      OUTPUT_VARIABLE RACKET_VERSION
-      OUTPUT_STRIP_TRAILING_WHITESPACE
-      RESULT_VARIABLE _racket_version_result
-    )
-    if(_racket_version_result)
-      message(WARNING "Unable to determin racket version: ${_racket_version_result}")
-    endif()
 
-    # Create an imported target for Racket
-    if(NOT TARGET Racket::racket)
-      add_executable(Racket::racket IMPORTED GLOBAL)
-      set_target_properties(Racket::racket PROPERTIES IMPORTED_LOCATION "${RACKET_EXECUTABLE}")
-    endif()
-  endif()
-endmacro()
+# function(_Racket_find_racket)
+#   # Find the racket executable
+#   find_program(
+#     RACKET_EXECUTABLE
+#     NAMES racket
+#   )
+#   mark_as_advanced(RACKET_EXECUTABLE)
+#   if(RACKET_EXECUTABLE)
+#     # Get the racket version
+#     execute_process(
+#       COMMAND "${RACKET_EXECUTABLE}" --version
+#       OUTPUT_VARIABLE RACKET_VERSION
+#       OUTPUT_STRIP_TRAILING_WHITESPACE
+#       RESULT_VARIABLE _racket_version_result
+#     )
+#     if(_racket_version_result)
+#       message(WARNING "Unable to determin racket version: ${_racket_version_result}")
+#     endif()
 
-macro(_Racket_find_raco)
-  find_program(RACO_EXECUTABLE NAMES raco)
-  mark_as_advanced(RACO_EXECUTABLE)
-  if(RACO_EXECUTABLE)
-    if(NOT TARGET Racket::raco)
-      add_executable(Racket::raco IMPORTED GLOBAL)
-      set_target_properties(Racket::racket PROPERTIES IMPORTED_LOCATION "${RACO_EXECUTABLE}")
-    endif()
-  endif()
-endmacro()
+#     # Create an imported target for Racket
+#     if(NOT TARGET Racket::racket)
+#       add_executable(Racket::racket IMPORTED GLOBAL)
+#       set_target_properties(Racket::racket PROPERTIES IMPORTED_LOCATION "${RACKET_EXECUTABLE}")
+#     endif()
+#   endif()
+# endmacro()
+
+# function(_Racket_find_raco)
+#   find_program(RACO_EXECUTABLE NAMES raco)
+#   mark_as_advanced(RACO_EXECUTABLE)
+#   if(RACO_EXECUTABLE)
+#     if(NOT TARGET Racket::raco)
+#       add_executable(Racket::raco IMPORTED GLOBAL)
+#       set_target_properties(Racket::racket PROPERTIES IMPORTED_LOCATION "${RACO_EXECUTABLE}")
+#     endif()
+#   endif()
+# endfunction()
+
+_racket_find_racket()
+_racket_find_raco()
 
 foreach(_comp IN LISTS Racket_FIND_COMPONENTS)
   if(_comp STREQUAL "racket")
@@ -128,10 +144,6 @@ foreach(_comp IN LISTS Racket_FIND_COMPONENTS)
   endif()
 endforeach()
 unset(_comp)
-
-#
-#  ... Verify find results
-#
 include(FindPackageHandleStandardArgs)
 find_package_handle_standard_args(
   Racket

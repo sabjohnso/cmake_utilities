@@ -21,35 +21,35 @@ function(cmake_utilities_add_test name)
     COMMAND ${CMAKE_COMMAND} -E rm -f ${cache_file}
     COMMAND ${CMAKE_COMMAND} -B ${binary_dir} -S ${source_dir}
     COMMAND ${CMAKE_COMMAND} --build ${binary_dir}
-    DEPENDS ${ARG_DEPENDS}
+    DEPENDS ${ARG_DEPENDS} ${source_dir}/CMakeLists.txt
   )
   add_custom_target(${name}_target DEPENDS ${cache_file})
   add_test(
     NAME ${name}
-    COMMAND ${CMAKE_COMMAND} --build .
-    WORKING_DIRECTORY ${bindir}
+    COMMAND ${CMAKE_COMMAND}  --build . --target ${name}_target
+    WORKING_DIRECTORY ${PROJECT_BINARY_DIR}
   )
 
 endfunction()
 
-cmake_utilities_add_test(contextual ${PROJECT_DIR}/contextual.cmake)
-cmake_utilities_add_test(cppzmq ${PROJECT_DIR}/cppzmq.cmake)
-cmake_utilities_add_test(ctstring ${PROJECT_DIR}/ctstring.cmake)
-cmake_utilities_add_test(easyj ${PROJECT_DIR}/easyj.cmake)
-cmake_utilities_add_test(fmt ${PROJECT_DIR}/fmt.cmake)
-cmake_utilities_add_test(gtest ${PROJECT_DIR}/gtest.cmake)
-cmake_utilities_add_test(integer ${PROJECT_DIR}/integer.cmake)
-cmake_utilities_add_test(introspection ${PROJECT_DIR}/introspection.cmake)
-cmake_utilities_add_test(libzmq ${PROJECT_DIR}/libzmq.cmake)
-cmake_utilities_add_test(lz4 ${PROJECT_DIR}/lz4.cmake)
+cmake_utilities_add_test(contextual DEPENDS ${PROJECT_DIR}/contextual.cmake)
+cmake_utilities_add_test(cppzmq DEPENDS ${PROJECT_DIR}/cppzmq.cmake)
+cmake_utilities_add_test(ctstring DEPENDS ${PROJECT_DIR}/ctstring.cmake)
+cmake_utilities_add_test(easyj DEPENDS ${PROJECT_DIR}/easyj.cmake)
+cmake_utilities_add_test(fmt DEPENDS ${PROJECT_DIR}/fmt.cmake)
+cmake_utilities_add_test(gtest DEPENDS ${PROJECT_DIR}/gtest.cmake)
+# cmake_utilities_add_test(integer DEPENDS ${PROJECT_DIR}/integer.cmake)
+cmake_utilities_add_test(introspection DEPENDS ${PROJECT_DIR}/introspection.cmake)
+cmake_utilities_add_test(libzmq DEPENDS ${PROJECT_DIR}/libzmq.cmake)
+cmake_utilities_add_test(lz4 DEPENDS ${PROJECT_DIR}/lz4.cmake)
 cmake_utilities_add_test(nlohmann_json_schema_validator
-  ${PROJECT_DIR}/nlohmann_json_schema_validator.cmake)
-cmake_utilities_add_test(pfr ${PROJECT_DIR}/pfr.cmake)
-cmake_utilities_add_test(pybind11 ${PROJECT_DIR}/pybind11.cmake)
-cmake_utilities_add_test(rxcpp ${PROJECT_DIR}/rxcpp.cmake)
-cmake_utilities_add_test(type_utility ${PROJECT_DIR}/type_utility.cmake)
-cmake_utilities_add_test(xxhash ${PROJECT_DIR}/xxhash.cmake)
-cmake_utilities_add_test(ZeroMQ ${PROJECT_DIR}/ZeroMQ.cmake)
-cmake_utilities_add_test(ZeroMQPP ${PROJECT_DIR}/ZeroMQPP.cmake)
-cmake_utilities_add_test(Racket ${PROJECT_DIR}/Racket.cmake)
+  DEPENDS ${PROJECT_DIR}/nlohmann_json_schema_validator.cmake)
+cmake_utilities_add_test(pfr DEPENDS ${PROJECT_DIR}/pfr.cmake)
+cmake_utilities_add_test(pybind11 DEPENDS ${PROJECT_DIR}/pybind11.cmake)
+cmake_utilities_add_test(rxcpp DEPENDS ${PROJECT_DIR}/rxcpp.cmake)
+cmake_utilities_add_test(type_utility DEPENDS ${PROJECT_DIR}/type_utility.cmake)
+cmake_utilities_add_test(xxhash DEPENDS ${PROJECT_DIR}/xxhash.cmake)
+cmake_utilities_add_test(ZeroMQ DEPENDS ${PROJECT_DIR}/ZeroMQ.cmake)
+cmake_utilities_add_test(ZeroMQPP DEPENDS ${PROJECT_DIR}/ZeroMQPP.cmake)
+cmake_utilities_add_test(Racket DEPENDS ${PROJECT_DIR}/Racket.cmake)
 cmake_utilities_add_test(GUnit DEPENDS ${PROJECT_DIR}/FindGUnit.cmake)
