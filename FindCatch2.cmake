@@ -9,5 +9,6 @@ if(NOT catch2_FOUND)
       ${catch2_SOURCE_DIR}
       ${catch2_BINARY_DIR}
       ${catch2_EXCLUDE_FROM_ALL})
+    set(catch2_FOUND TRUE)
   endif()
 endif()
