@@ -3,7 +3,7 @@ if(NOT catch2_FOUND)
   git_resolvable_dependency(
     NAME catch2
     GIT_REPOSITORY https://github.com/catchorg/Catch2.git
-    GIT_TAG v3.4.0)
+    GIT_TAG v3.6.0)
   if(NOT catch2_FOUND)
     add_subdirectory(
       ${catch2_SOURCE_DIR}
