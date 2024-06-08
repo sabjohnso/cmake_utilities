@@ -11,4 +11,5 @@ if(NOT TARGET xsimd)
       ${xsimd_BINARY_DIR}
       ${xsimd_EXCLUDE_FROM_ALL}
     )
+  endif()
 endif()
