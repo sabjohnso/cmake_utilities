@@ -1,7 +1,7 @@
 if(NOT TARGET xsimd)
   include(dependency)
   git_resolvable_dependency(
-    NAME easyj
+    NAME xsimd
     GIT_REPOSITORY https://github.com/xtensor-stack/xsimd.git
     GIT_TAG master
   )
