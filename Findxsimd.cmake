@@ -3,7 +3,7 @@ if(NOT TARGET xsimd)
   git_resolvable_dependency(
     NAME easyj
     GIT_REPOSITORY https://github.com/xtensor-stack/xsimd.git
-    GIT_TAG master)
+    GIT_TAG master
   )
   if(NOT xsimd_FOUND)
     add_subdirectory(
