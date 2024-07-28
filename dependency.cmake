@@ -31,6 +31,8 @@ macro(git_resolvable_dependency)
 
   if(NOT ${DEP_NAME}_FOUND)
     FetchContent_Declare(${DEP_NAME}
+      SYSTEM
+      EXCLUDE_FROM_ALL
       GIT_REPOSITORY ${DEP_GIT_REPOSITORY}
       GIT_TAG ${DEP_GIT_TAG})
     if(NOT ${DEP_NAME}_POPULATED)
