@@ -1,5 +1,6 @@
 include(parameter)
 include(FetchContent)
+include(show)
 
 macro(git_resolvable_dependency)
   set(one_value_keywords NAME GIT_REPOSITORY GIT_TAG)
@@ -12,8 +13,9 @@ macro(git_resolvable_dependency)
   if(NOT DEP_GIT_REPOSITORY)
     message(FATAL_ERROR "git_resolvable_dependency is missing required keyword GIT_REPOSITORY")
   endif()
-
-  message(STATUS "DEP_GIT_TAG: ${DEP_GIT_TAG}")
+  show(DEP_NAME)
+  show(DEP_GIT_REPOSITORY)
+  show(DEP_GIT_TAG)
 
   parameter(
     NAME ${DEP_NAME}_GIT_REPOSITORY
