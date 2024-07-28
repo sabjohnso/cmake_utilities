@@ -17,7 +17,6 @@ macro(git_resolvable_dependency)
   show(DEP_GIT_REPOSITORY)
   show(DEP_GIT_TAG)
 
-
   parameter(
     NAME ${DEP_NAME}_GIT_REPOSITORY
     DEFAULT ${DEP_GIT_REPOSITORY}
