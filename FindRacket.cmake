@@ -74,76 +74,88 @@ Install a package
 
 #]=====================================================================================]
 
-function(_racket_find_racket)
-  find_program(RACKET_EXECUTABLE NAMES racket)
-  set(RACKET_EXECUTABLE ${RACKET_EXECUTABLE} PARENT_SCOPE)
-  add_executable(Racket::racket IMPORTED GLOBAL)
-  set_target_properties(Racket::racket PROPERTIES IMPORTED_LOCATION "${RACKET_EXECUTABLE}")
+
+
+set(_racket_programs
+  drracket
+  gracket
+  gracket-text
+  mred
+  mred-text
+  mzc
+  mzpp
+  mzscheme
+  mztext
+  pdf-slatex
+  plt-games
+  plt-help
+  plt-r5rs
+  plt-r6rs
+  plt-web-server
+  racket
+  raco
+  scribble
+  setup-plt
+  slatex
+  slideshow
+  swindle)
+
+
+set(_racket_components ${_racket_programs})
+
+function(_racket_get_version var)
+  execute_process(
+    COMMAND ${RACKET_EXECUTABLE} -e "(version)"
+    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+    OUTPUT_VARIABLE _racket_version
+    OUTPUT_STRIP_TRAILING_WHITESPACE
+    COMMAND_ERROR_IS_FATAL ANY
+  )
+  set(${var} ${_racket_version} PARENT_SCOPE)
 endfunction()
 
-function(_racket_find_raco)
-  find_program(RACO_EXECUTABLE NAMES racket)
-  set(RACO_EXECUTABLE ${RACO_EXECUTABLE} PARENT_SCOPE)
-  add_executable(Racket::raco IMPORTED GLOBAL)
-  set_target_properties(Racket::raco PROPERTIES IMPORTED_LOCATION "${RACO_EXECUTABLE}")
+function(_racket_validate_components)
+  foreach(comp IN LISTS Racket_FIND_COMPONENTS)
+    list(FIND _racket_components ${comp} comp_index)
+    if(${comp_index} STREQUAL -1)
+      message(FATAL_ERROR "${comp} is not a valid component of Racket")
+    endif()
+  endforeach()
 endfunction()
 
+function(_racket_find_racket_programs)
+  macro(find_racket_program program)
+    string(TOUPPER ${program} program_upper)
+    find_program(${program_upper}_EXECUTABLE NAMES ${program})
+    set(${program_upper}_EXECUTABLE ${${program_upper}_EXECUTABLE} PARENT_SCOPE)
+    add_executable(Racket::${program} IMPORTED GLOBAL)
+    set_target_properties(Racket::${program} PROPERTIES IMPORTED_LOCATION "${${program_upper}_EXECUTABLE}")
+  endmacro()
 
-# function(_Racket_find_racket)
-#   # Find the racket executable
-#   find_program(
-#     RACKET_EXECUTABLE
-#     NAMES racket
-#   )
-#   mark_as_advanced(RACKET_EXECUTABLE)
-#   if(RACKET_EXECUTABLE)
-#     # Get the racket version
-#     execute_process(
-#       COMMAND "${RACKET_EXECUTABLE}" --version
-#       OUTPUT_VARIABLE RACKET_VERSION
-#       OUTPUT_STRIP_TRAILING_WHITESPACE
-#       RESULT_VARIABLE _racket_version_result
-#     )
-#     if(_racket_version_result)
-#       message(WARNING "Unable to determin racket version: ${_racket_version_result}")
-#     endif()
+  foreach(program ${_racket_programs})
+    find_racket_program(${program})
+  endforeach()
+endfunction()
 
-#     # Create an imported target for Racket
-#     if(NOT TARGET Racket::racket)
-#       add_executable(Racket::racket IMPORTED GLOBAL)
-#       set_target_properties(Racket::racket PROPERTIES IMPORTED_LOCATION "${RACKET_EXECUTABLE}")
-#     endif()
-#   endif()
-# endmacro()
+function(_racket_find_components)
+  foreach(comp IN LISTS Racket_FIND_COMPONENTS)
+    if(TARGET Racket::${comp})
+      set(Racket_${comp}_FOUND TRUE PARENT_SCOPE)
+    endif()
+  endforeach()
+endfunction()
 
-# function(_Racket_find_raco)
-#   find_program(RACO_EXECUTABLE NAMES raco)
-#   mark_as_advanced(RACO_EXECUTABLE)
-#   if(RACO_EXECUTABLE)
-#     if(NOT TARGET Racket::raco)
-#       add_executable(Racket::raco IMPORTED GLOBAL)
-#       set_target_properties(Racket::racket PROPERTIES IMPORTED_LOCATION "${RACO_EXECUTABLE}")
-#     endif()
-#   endif()
-# endfunction()
+_racket_validate_components()
+_racket_find_racket_programs()
+_racket_find_components()
 
-_racket_find_racket()
-_racket_find_raco()
+_racket_get_version(RACKET_VERSION)
 
-foreach(_comp IN LISTS Racket_FIND_COMPONENTS)
-  if(_comp STREQUAL "racket")
-  elseif(_comp STREQUAL "raco")
-  else()
-    message(FATAL_ERROR "${_comp} is not a valid Racket component")
-  endif()
+get_filename_component(RACKET_BIN_DIR ${RACKET_EXECUTABLE} DIRECTORY)
+get_filename_component(RACKET_ROOT ${RACKET_BIN_DIR} DIRECTORY CACHE)
+set(Racket_ROOT ${RACKET_ROOT})
 
-  if(TARGET Racket::${_comp})
-    set(Racket_${_comp}_FOUND TRUE)
-  else()
-    set(Racket_${_comp}_FOUND FALSE)
-  endif()
-endforeach()
-unset(_comp)
+
 include(FindPackageHandleStandardArgs)
 find_package_handle_standard_args(
   Racket
@@ -151,3 +163,22 @@ find_package_handle_standard_args(
   VERSION_VAR RACKET_VERSION
   HANDLE_COMPONENTS
 )
+
+function(_racket_debug_info)
+  include(show)
+  message(STATUS)
+  message(STATUS "========( FindRacket.cmake debug )============")
+  show(RACKET_ROOT)
+  show(Racket_ROOT)
+  show(_racket_programs)
+  show(_racket_components)
+  show(Racket_FIND_COMPONENTS)
+  foreach(comp IN LISTS Racket_FIND_COMPONENTS)
+    show(Racket_${comp}_FOUND)
+  endforeach()
+  message(STATUS)
+endfunction()
+
+if(_Racket_DEBUG_OUTPUT)
+  _racket_debug_info()
+endif()

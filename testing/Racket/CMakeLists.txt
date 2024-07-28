@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.22)
 project(racket_integration)
 
 list(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/../..)
-find_package(Racket REQUIRED COMPONENTS racket raco)
+find_package(Racket REQUIRED COMPONENTS racket raco slideshow)
 
 message(STATUS "RACKET_FOUND: ${RACKET_FOUND}")
 message(STATUS "${CMAKE_CURRENT_SOURCE_DIR}/my-script.rkt")
