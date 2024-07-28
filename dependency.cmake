@@ -1,4 +1,4 @@
-include(parameter)
+include(parameter)P
 include(FetchContent)
 
 macro(git_resolvable_dependency)
