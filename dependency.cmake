@@ -34,14 +34,14 @@ macro(git_resolvable_dependency)
 
   if(NOT ${DEP_NAME}_FOUND)
     message(STATUS "DEP_NAME: ${DEP_NAME}")
-    message(STATUS "DEP_GIT_REPOSITORY: ${DEP_GIT_REPOSITORY}")
-    message(STATUS "DEP_GIT_TAG: ${${DEP}_GIT_TAG}")
+    message(STATUS "${DEP_NAME}_GIT_REPOSITORY: ${${DEP_NAME}_GIT_REPOSITORY}")
+    message(STATUS "${DEP_NAME}_GIT_TAG: ${${DEP_NAME}_GIT_TAG}")
 
     FetchContent_Declare(${DEP_NAME}
       EXCLUDE_FROM_ALL
       SYSTEM
-      GIT_REPOSITORY ${DEP_GIT_REPOSITORY}
-      GIT_TAG ${${DEP}_GIT_TAG})
+      GIT_REPOSITORY ${${DEP_NAME}_GIT_REPOSITORY}}
+      GIT_TAG ${${DEP_NAME}_GIT_TAG})
     if(NOT ${DEP_NAME}_POPULATED)
       FetchContent_MakeAvailable(${DEP_NAME})
     endif()
