@@ -13,7 +13,7 @@ macro(git_resolvable_dependency)
     message(FATAL_ERROR "git_resolvable_dependency is missing required keyword GIT_REPOSITORY")
   endif()
 
-  message(STATUS "DEP_GIT_TAG: ${DEP_GIT_TAG}"
+  message(STATUS "DEP_GIT_TAG: ${DEP_GIT_TAG}")
 
   parameter(
     NAME ${DEP_NAME}_GIT_REPOSITORY
