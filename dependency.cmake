@@ -26,13 +26,14 @@ macro(git_resolvable_dependency)
     DOC "git tag for ${DEP_NAME}")
 
   if(NOT ${DEP_NAME}_FORCE_DOWNLOAD)
+    message(STATUS "Searching for installed ${DEP_NAME}")
     find_package(${DEP_NAME} CONFIG QUIET)
   endif()
 
   if(NOT ${DEP_NAME}_FOUND)
     FetchContent_Declare(${DEP_NAME}
-      SYSTEM
       EXCLUDE_FROM_ALL
+      SYSTEM
       GIT_REPOSITORY ${DEP_GIT_REPOSITORY}
       GIT_TAG ${DEP_GIT_TAG})
     if(NOT ${DEP_NAME}_POPULATED)
