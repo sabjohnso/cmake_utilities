@@ -40,8 +40,8 @@ macro(git_resolvable_dependency)
     FetchContent_Declare(${DEP_NAME}
       EXCLUDE_FROM_ALL
       SYSTEM
-      GIT_REPOSITORY ${${DEP_NAME}_GIT_REPOSITORY}}
-      GIT_TAG ${${DEP_NAME}_GIT_TAG})
+      GIT_REPOSITORY "${${DEP_NAME}_GIT_REPOSITORY}"}
+      GIT_TAG "${${DEP_NAME}_GIT_TAG}")
     if(NOT ${DEP_NAME}_POPULATED)
       FetchContent_MakeAvailable(${DEP_NAME})
     endif()
