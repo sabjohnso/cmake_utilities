@@ -7,7 +7,8 @@ if(NOT nlohmann_json_schema_validator_FOUND)
     add_subdirectory(
       ${nlohmann_json_schema_validator_SOURCE_DIR}
       ${nlohmann_json_schema_validator_BINARY_DIR}
-      ${nlohmann_json_schema_validator_EXCLUDE_FROM_ALL})
+      ${nlohmann_json_schema_validator_EXCLUDE_FROM_ALL}
+    EXCLUDE_FROM_ALL)
 
     if(TARGET nlohmann_json_schema_validator)
       set(nlohmann_json_schema_validator_FOUND TRUE)
