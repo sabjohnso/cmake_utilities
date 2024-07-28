@@ -4,7 +4,7 @@ include(show)
 
 macro(git_resolvable_dependency)
   set(one_value_keywords NAME GIT_REPOSITORY GIT_TAG)
-  cmake_parse_arguments(DEP "" ${one_value_keywords} "" ${ARGN})
+  cmake_parse_arguments(DEP "" "${one_value_keywords}" "" ${ARGN})
 
   if(NOT DEP_NAME)
     message(FATAL_ERROR "git_resolvable_dependency is missing required keyword NAME")
