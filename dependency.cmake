@@ -28,6 +28,8 @@ macro(git_resolvable_dependency)
   if(NOT ${DEP_NAME}_FORCE_DOWNLOAD)
     message(STATUS "Searching for installed ${DEP_NAME}")
     find_package(${DEP_NAME} CONFIG QUIET)
+  else()
+    message(STATUS "Forcing download of ${DEP_NAME}")
   endif()
 
   if(NOT ${DEP_NAME}_FOUND)
