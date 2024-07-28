@@ -5,10 +5,6 @@ if(NOT catch2_FOUND)
     GIT_REPOSITORY https://github.com/catchorg/Catch2.git
     GIT_TAG v3.6.0)
   if(NOT catch2_FOUND)
-    add_subdirectory(
-      ${catch2_SOURCE_DIR}
-      ${catch2_BINARY_DIR}
-      ${catch2_EXCLUDE_FROM_ALL})
-    set(catch2_FOUND TRUE)
+    set_property(DIRECTORY ${catch2_SOURCE_DIR} PROPERTY EXCLUDE_FROM_ALL ON)
   endif()
 endif()
