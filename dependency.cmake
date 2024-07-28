@@ -34,7 +34,7 @@ macro(git_resolvable_dependency)
       GIT_REPOSITORY ${DEP_GIT_REPOSITORY}
       GIT_TAG ${DEP_GIT_TAG})
     if(NOT ${DEP_NAME}_POPULATED)
-      FetchContent_Populate(${DEP_NAME})
+      FetchContent_MakeAvailable(${DEP_NAME})
     endif()
   endif()
 endmacro()
