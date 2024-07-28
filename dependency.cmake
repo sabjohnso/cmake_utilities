@@ -33,6 +33,10 @@ macro(git_resolvable_dependency)
   endif()
 
   if(NOT ${DEP_NAME}_FOUND)
+    message(STATUS "DEP_NAME: ${DEP_NAME}")
+    message(STATUS "DEP_GIT_REPOSITORY: ${DEP_GIT_REPOSITORY}")
+    message(STATUS "DEP_GIT_TAG: ${DEP_GIT_TAG}")
+
     FetchContent_Declare(${DEP_NAME}
       EXCLUDE_FROM_ALL
       SYSTEM
