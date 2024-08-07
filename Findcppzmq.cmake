@@ -1,7 +1,7 @@
 include(dependency)
 include(show)
 
-find_package(zmq REQUIRED)
+find_package(ZeroMQ REQUIRED)
 
 git_resolvable_dependency(
   NAME cppzmq
@@ -18,8 +18,6 @@ if(NOT cppzmq_FOUND)
   target_include_directories(cppzmq_header
     INTERFACE
     $<BUILD_INTERFACE:${cppzmq_SOURCE_DIR}>)
-
-
 
   add_library(cppzmq::header ALIAS cppzmq_header)
 
