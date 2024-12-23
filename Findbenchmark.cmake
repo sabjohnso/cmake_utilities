@@ -18,15 +18,14 @@ endif()
 if(NOT benchmark_FOUND)
 
   message(STATUS "benchmark_REPOSITORY: ${benchmark_REPOSITORY}")
-  
+
   FetchContent_Declare(bench
     GIT_REPOSITORY ${benchmark_REPOSITORY}
     GIT_TAG ${benchmark_TAG})
   FetchContent_GetProperties(bench)
   if(NOT bench_POPULATED)
     set(BENCHMARK_ENABLE_TESTING OFF CACHE INTERNAL "")
-    FetchContent_Populate(bench)
-    add_subdirectory(${bench_SOURCE_DIR} ${bench_BINARY_DIR})
+    FetchContent_MakeAvailable(bench)
   endif()
   set(benchmark_FOUND TRUE)
 endif()
