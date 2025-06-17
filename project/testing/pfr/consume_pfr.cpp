@@ -7,7 +7,7 @@
 //
 // ... External header files
 //
-#include <pfr.hpp>
+#include <boost/pfr.hpp>
 
 struct example
 {
@@ -20,6 +20,6 @@ int
 main(int, char**)
 {
   example value{3, 0.5, "Some text"};
-  std::cout << pfr::io(value) << std::endl;
+  std::cout << boost::pfr::io(value) << std::endl;
   return 0;
 }
