@@ -35,7 +35,7 @@ if(NOT lz4_FOUND)
         IMPORTED_LOCATION ${lz4_BINARY_DIR}/bin/lz4)
 
       if(NOT lz4_EXCLUDE_FROM_ALL)
-        install(CODE "execute_process(COMMAND env ${xxhash_BUILD_END} make PREFIX=${CMAKE_INSTALL_PREFIX} install -j  WORKING_DIRECTORY ${lz4_SOURCE_DIR})")
+        install(CODE "execute_process(COMMAND env ${lz4_BUILD_ENV} make PREFIX=${CMAKE_INSTALL_PREFIX} install -j  WORKING_DIRECTORY ${lz4_SOURCE_DIR})")
 
   endif()
 endif()

@@ -50,7 +50,7 @@ function(add_imported_library name)
   endif()
 
   if(NOT EXISTS ${LIB_IMPORTED_LOCATION})
-    message(FATAL_ERROR "The imported location for library ${name} does not exists (${EXE_IMPORTED_LOCATION})")
+    message(FATAL_ERROR "The imported location for library ${name} does not exists (${LIB_IMPORTED_LOCATION})")
   endif()
 
   add_library(${name} IMPORTED ${linkage})
@@ -93,7 +93,7 @@ endfunction()
 
 
 macro(validate_package var)
-  set(${var} FALSE)
+  set(${var} TRUE)
 
   set(options)
   set(one_value_keywords NAMESPACE ROOT BINDIR LIBDIR INCLUDEDIR)
@@ -101,19 +101,19 @@ macro(validate_package var)
   cmake_parse_arguments(PKG "${options}" "${one_value_keywords}" "${multivalue_keywords}" ${ARGN})
 
   foreach(EXE ${PKG_EXECUTABLES})
-    if(NOT EXISTS ${PRKG_ROOT}/${PKG_BINDIR}/${EXE})
+    if(NOT EXISTS ${PKG_ROOT}/${PKG_BINDIR}/${EXE})
       set(${var} FALSE)
     endif()
   endforeach()
 
   foreach(LIB ${PKG_SHARED_LIBRARIES})
-      if(NOT EXISTS ${PRKG_ROOT}/${PKG_LIBDIR}/${LIB})
-        set(${var} FALSE)
-      endif()
+    if(NOT EXISTS ${PKG_ROOT}/${PKG_LIBDIR}/${LIB})
+      set(${var} FALSE)
+    endif()
   endforeach()
 
   foreach(LIB ${PKG_STATIC_LIBRARIES})
-    if(NOT EXISTS ${PRKG_ROOT}/${PKG_LIBDIR}/${LIB})
+    if(NOT EXISTS ${PKG_ROOT}/${PKG_LIBDIR}/${LIB})
       set(${var} FALSE)
     endif()
   endforeach()

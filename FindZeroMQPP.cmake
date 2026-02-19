@@ -1,26 +1,19 @@
-include(dependency)
-include(show)
-
-find_package(ZeroMQ REQUIRED)
-
-git_resolvable_dependency(
-  NAME ZeroMQPP
-  GIT_REPOSITORY https://github.com/zeromq/zmqpp.git)
-
 if(NOT ZeroMQPP_FOUND)
+  include(dependency)
 
-  include_directories(${ZEROMQ_INCLUDE})
+  find_package(ZeroMQ REQUIRED)
 
-  add_subdirectory(
-    ${zeromqpp_SOURCE_DIR}
-    ${zeromqpp_BINARY_DIR}
-    ${zeromqpp_EXCLUDE_FROM_ALL})
+  git_resolvable_dependency(
+    NAME ZeroMQPP
+    GIT_REPOSITORY https://github.com/zeromq/zmqpp.git)
 
-  target_include_directories(zmqpp
-    PRIVATE ${ZEROMQ_INCLUDE})
+  if(TARGET zmqpp AND DEFINED ZEROMQ_INCLUDE)
+    target_include_directories(zmqpp
+      PRIVATE ${ZEROMQ_INCLUDE})
+  endif()
 
-  target_include_directories(zmqpp-static
-    PRIVATE ${ZEROMQ_INCLUDE})
-
-  set(ZeroMQPP_FOUND)
+  if(TARGET zmqpp-static AND DEFINED ZEROMQ_INCLUDE)
+    target_include_directories(zmqpp-static
+      PRIVATE ${ZEROMQ_INCLUDE})
+  endif()
 endif()

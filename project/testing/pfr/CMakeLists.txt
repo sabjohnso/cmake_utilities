@@ -6,5 +6,5 @@ find_package(pfr REQUIRED)
 
 add_executable(consume_pfr consume_pfr.cpp)
 target_link_libraries(consume_pfr
-  PRIVATE Boost::pfr
+  PRIVATE pfr::pfr
 )

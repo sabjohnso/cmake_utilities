@@ -3,8 +3,8 @@
 #
 macro(configurable name envname default docstring)
   if(NOT ${name})
-    if(ENV{${envname})
-      set(${name}_SELECTION $ENV{$envname})
+    if(DEFINED ENV{${envname}})
+      set(${name}_SELECTION $ENV{${envname}})
     else()
       set(${name}_SELECTION ${default})
     endif()

@@ -38,7 +38,7 @@ if(NOT xxhash_FOUND)
         IMPORTED_LOCATION ${xxhash_BINARY_DIR}/bin/xxhsum)
 
     if(NOT xxhash_EXCLUDE_FROM_ALL)
-      install(CODE "execute_process(COMMAND env ${xxhash_BUILD_END} make PREFIX=${CMAKE_INSTALL_PREFIX} install -j  WORKING_DIRECTORY ${xxhash_SOURCE_DIR})")
+      install(CODE "execute_process(COMMAND env ${xxhash_BUILD_ENV} make PREFIX=${CMAKE_INSTALL_PREFIX} install -j  WORKING_DIRECTORY ${xxhash_SOURCE_DIR})")
     endif()
 
   endif()
