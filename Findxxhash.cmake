@@ -21,14 +21,14 @@ if(NOT xxhash_FOUND)
     add_library(xxhash::xxhash_SHARED IMPORTED SHARED)
     set_target_properties(xxhash::xxhash_SHARED
       PROPERTIES
-        IMPORTED_LOCATION ${xxhash_BINARY_DIR}/lib/libxxhash.so
+        IMPORTED_LOCATION ${xxhash_BINARY_DIR}/lib/${CMAKE_SHARED_LIBRARY_PREFIX}xxhash${CMAKE_SHARED_LIBRARY_SUFFIX}
         IMPORTED_GLOBAL TRUE
         INTERFACE_INCLUDE_DIRECTORIES ${xxhash_BINARY_DIR}/include)
 
     add_library(xxhash::xxhash_STATIC IMPORTED STATIC)
     set_target_properties(xxhash::xxhash_STATIC
       PROPERTIES
-        IMPORTED_LOCATION ${xxhash_BINARY_DIR}/lib/libxxhash.a
+        IMPORTED_LOCATION ${xxhash_BINARY_DIR}/lib/${CMAKE_STATIC_LIBRARY_PREFIX}xxhash${CMAKE_STATIC_LIBRARY_SUFFIX}
         IMPORTED_GLOBAL TRUE
         INTERFACE_INCLUDE_DIRECTORIES ${xxhash_BINARY_DIR}/include)
 
