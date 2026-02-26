@@ -1,0 +1,6 @@
+cmake_minimum_required(VERSION 3.12)
+project(consume_expat C)
+list(INSERT CMAKE_MODULE_PATH 0 ${PROJECT_SOURCE_DIR}/../../..)
+find_package(Expat REQUIRED)
+add_executable(consume_expat consume_expat.c)
+target_link_libraries(consume_expat PRIVATE expat::expat)
