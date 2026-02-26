@@ -1,0 +1,6 @@
+cmake_minimum_required(VERSION 3.12)
+project(consume_json_commander)
+list(INSERT CMAKE_MODULE_PATH 0 ${PROJECT_SOURCE_DIR}/../../..)
+find_package(json-commander REQUIRED)
+add_executable(consume_json_commander consume_json_commander.cpp)
+target_link_libraries(consume_json_commander PRIVATE json_commander::header)
