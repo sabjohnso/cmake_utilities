@@ -16,7 +16,7 @@ if(NOT GUnit_FOUND)
   get_target_property(gtest_compile_flags gtest COMPILE_FLAGS)
   string(REPLACE "-Wno-implicit-int-float-conversion" "" gtest_compile_flags ${gtest_compile_flags})
   string(REPLACE "  " " " gtest_compile_flags ${gtest_compile_flags})
-  string(APPEND gtest_compile_flags " -Wno-implicit-int-float-conversion")
+  string(APPEND gtest_compile_flags " -Wno-implicit-int-float-conversion -Wno-deprecated-declarations")
   set_target_properties(gtest
     PROPERTIES COMPILE_FLAGS "${gtest_compile_flags}")
   target_link_libraries(GUnit INTERFACE gtest gmock gherkin-cpp::gherkin-cpp)
