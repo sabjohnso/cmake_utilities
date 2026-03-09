@@ -15,6 +15,6 @@ if(NOT json-commander_FOUND)
 
   git_resolvable_dependency(
     NAME json-commander
-    GIT_REPOSITORY git@github.com:JSON-Commander/json-commander.git
+    GIT_REPOSITORY https://github.com/JSON-Commander/json-commander.git
     GIT_TAG main)
 endif()
