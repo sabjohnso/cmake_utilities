@@ -163,12 +163,15 @@ cmake_utilities_add_test(Expat
 cmake_utilities_add_test(CURL
   DEPENDS ${CMAKE_UTILITIES_ROOT}/FindCURL.cmake)
 
+cmake_utilities_add_test(xb
+  DEPENDS ${CMAKE_UTILITIES_ROOT}/Findxb.cmake)
+
 # Global target to clean all tests
 set(all_test_names
   contextual cppzmq ctstring easyj fmt gtest highfive
   introspection lz4 nlohmann_json_schema_validator pfr pybind11
   type_utility xxhash ZeroMQ ZeroMQPP Racket GUnit unwind
-  json-commander Expat CURL)
+  json-commander Expat CURL xb)
 
 set(all_clean_targets)
 foreach(test_name IN LISTS all_test_names)
