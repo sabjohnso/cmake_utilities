@@ -4,7 +4,7 @@ if(NOT TARGET function_utility::header)
   git_resolvable_dependency(
     NAME function_utility
     GIT_REPOSITORY https://github.com/sabjohnso/function_utility.git
-    GIT_TAG main)
+    GIT_TAG master)
   if(NOT function_utility_FOUND)
     add_subdirectory(
       ${function_utility_SOURCE_DIR}
