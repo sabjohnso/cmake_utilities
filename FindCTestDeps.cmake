@@ -3,5 +3,5 @@ if(NOT CTestDeps_FOUND)
   git_resolvable_dependency(
     NAME CTestDeps
     GIT_REPOSITORY https://github.com/sabjohnso/ctest_deps.git
-    GIT_TAG master)
+    GIT_TAG main)
 endif()
