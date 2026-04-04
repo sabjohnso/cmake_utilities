@@ -163,6 +163,10 @@ cmake_utilities_add_test(Expat
 cmake_utilities_add_test(CURL
   DEPENDS ${CMAKE_UTILITIES_ROOT}/FindCURL.cmake)
 
+cmake_utilities_add_test(tlaplus
+  DEPENDS ${CMAKE_UTILITIES_ROOT}/Findtlaplus.cmake
+  LABELS java)
+
 cmake_utilities_add_test(xb
   DEPENDS ${CMAKE_UTILITIES_ROOT}/Findxb.cmake)
 
@@ -171,7 +175,7 @@ set(all_test_names
   contextual cppzmq ctstring easyj fmt gtest highfive
   introspection lz4 nlohmann_json_schema_validator pfr pybind11
   type_utility xxhash ZeroMQ ZeroMQPP Racket GUnit unwind
-  json-commander Expat CURL xb)
+  json-commander Expat CURL tlaplus xb)
 
 set(all_clean_targets)
 foreach(test_name IN LISTS all_test_names)
