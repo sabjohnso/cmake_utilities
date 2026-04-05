@@ -23,18 +23,18 @@ if(NOT tlaplus_FOUND)
   set(tlaplus_JAR
     ${tlaplus_TOOLS_DIR}/dist/tla2tools.jar)
 
-  if(NOT EXISTS ${tlaplus_JAR})
-    message(STATUS "Building TLA+ command line tools with ant")
-    execute_process(
-      COMMAND ${CMAKE_COMMAND} -E env "JAVA_HOME=${JAVA_HOME}"
-              ${ANT_EXECUTABLE} -f customBuild.xml compile
-      WORKING_DIRECTORY ${tlaplus_TOOLS_DIR}
-      RESULT_VARIABLE tlaplus_BUILD_RESULT)
+  file(GLOB_RECURSE tlaplus_JAVA_SOURCES
+    ${tlaplus_TOOLS_DIR}/src/*.java)
 
-    if(NOT tlaplus_BUILD_RESULT EQUAL 0)
-      message(FATAL_ERROR "Failed to build TLA+ tools with ant")
-    endif()
-  endif()
+  add_custom_command(
+    OUTPUT ${tlaplus_JAR}
+    COMMAND ${CMAKE_COMMAND} -E make_directory ${tlaplus_TOOLS_DIR}/test-class
+    COMMAND ${CMAKE_COMMAND} -E env "JAVA_HOME=${JAVA_HOME}"
+            ${ANT_EXECUTABLE} -f customBuild.xml
+            -Dnoclean=true compile dist
+    WORKING_DIRECTORY ${tlaplus_TOOLS_DIR}
+    DEPENDS ${tlaplus_JAVA_SOURCES}
+    COMMENT "Building TLA+ command line tools with ant")
 
   set(tlaplus_BIN_DIR ${tlaplus_BINARY_DIR}/bin)
   file(MAKE_DIRECTORY ${tlaplus_BIN_DIR})
@@ -45,6 +45,9 @@ if(NOT tlaplus_FOUND)
     repl    tlc2.REPL
     pcal    pcal.trans
     tlatex  tla2tex.TLA)
+
+  add_custom_target(tlaplus_tools ALL
+    DEPENDS ${tlaplus_JAR})
 
   list(LENGTH tlaplus_TOOLS tlaplus_TOOLS_LENGTH)
   math(EXPR tlaplus_TOOLS_LAST "${tlaplus_TOOLS_LENGTH} - 1")
