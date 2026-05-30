@@ -3,5 +3,6 @@ if(NOT webview_FOUND)
   git_resolvable_dependency(
     NAME webview
     GIT_REPOSITORY https://github.com/webview/webview.git
-    GIT_TAG 0.12.0)
+    GIT_TAG 0.12.0
+  )
 endif()
